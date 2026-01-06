@@ -33,7 +33,7 @@ def signup_user(user: SingUpBase, db: Session = Depends(get_db)):
 
     new_user = User(
         username=user.username,
-        password=user.password,  # ⚠ hash later
+        password=user.password,  
         phone_no=user.phone_no,
         email=user.email
     )

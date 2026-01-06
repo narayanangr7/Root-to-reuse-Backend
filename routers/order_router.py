@@ -13,7 +13,7 @@ def get_db():
     finally:
         db.close()
 
-# 🧾 Create order
+# Create order
 @router.post("/create")
 def create_order(data: OrderCreate, db: Session = Depends(get_db)):
     order = Order(**data.model_dump())
@@ -22,7 +22,7 @@ def create_order(data: OrderCreate, db: Session = Depends(get_db)):
     db.refresh(order)
     return order
 
-# 📜 Get user orders
+# Get user orders
 @router.get("/user/{user_id}")
 def get_orders(user_id: int, db: Session = Depends(get_db)):
     return db.query(Order).filter(Order.user_id == user_id).all()

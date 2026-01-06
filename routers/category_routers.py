@@ -16,6 +16,11 @@ def get_db():
 
     db.commit()
 
+@router.get("/")
+def get_all_category(db: Session = Depends(get_db)):
+    new_category = db.query(Category).all()
+    return new_category
+
 # CREATE PRODUCT
 @router.post("/", operation_id="create_Catagory")
 def create_product(data: CategoryBase, db: Session = Depends(get_db)):

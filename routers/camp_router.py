@@ -6,7 +6,6 @@ from schemas.camp_schemas import CampCreate, CampUpdate, CampResponse
 
 router = APIRouter(prefix="/camp", tags=["Camp"])
 
-# DB Dependency
 def get_db():
     db = SessionLocal()
     try:
@@ -16,7 +15,6 @@ def get_db():
 
     db.commit()
 
-# CREATE
 @router.post("/create", response_model=CampResponse)
 def create_camp(data: CampCreate, db: Session = Depends(get_db)):
     camp = Camp(**data.model_dump())
@@ -26,13 +24,11 @@ def create_camp(data: CampCreate, db: Session = Depends(get_db)):
     return camp
 
 
-# GET ALL
 @router.get("/all", response_model=list[CampResponse])
 def get_all_camps(db: Session = Depends(get_db)):
     return db.query(Camp).all()
 
 
-# GET BY ID
 @router.get("/{camp_id}", response_model=CampResponse)
 def get_camp_by_id(camp_id: int, db: Session = Depends(get_db)):
     camp = db.query(Camp).filter(Camp.id == camp_id).first()
@@ -41,14 +37,12 @@ def get_camp_by_id(camp_id: int, db: Session = Depends(get_db)):
     return camp
 
 
-# GET BY VOLUNTEER
 @router.get("/volunteer/{volunteer_id}", response_model=list[CampResponse])
 def get_camps_by_volunteer(volunteer_id: int, db: Session = Depends(get_db)):
     camps = db.query(Camp).filter(Camp.volunteer_id == volunteer_id).all()
     return camps
 
 
-# UPDATE
 @router.put("/update/{camp_id}", response_model=CampResponse)
 def update_camp(
     camp_id: int,
@@ -67,7 +61,6 @@ def update_camp(
     return camp
 
 
-# 🔹 DELETE
 @router.delete("/delete/{camp_id}")
 def delete_camp(camp_id: int, db: Session = Depends(get_db)):
     camp = db.query(Camp).filter(Camp.id == camp_id).first()
