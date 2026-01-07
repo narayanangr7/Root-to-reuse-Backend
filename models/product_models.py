@@ -9,7 +9,7 @@ class Product(Base):
     category_id = Column(Integer, ForeignKey("category.id"))
 
     name = Column(String, nullable=False)
-    price = Column(Integer, nullable=False)
+    price = Column(Integer)
     description = Column(Text, nullable=False)
     product_type = Column(String)
     material = Column(String)

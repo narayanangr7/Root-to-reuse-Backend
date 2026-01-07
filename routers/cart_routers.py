@@ -63,3 +63,16 @@ def delete_cart(cart_id: int, db: Session = Depends(get_db)):
     db.delete(cart)
     db.commit()
     return {"message": "Cart item deleted"}
+
+@router.delete("/user/{user_id}")
+def delete_cart_by_user(user_id: int, db: Session = Depends(get_db)):
+    carts = db.query(Cart).filter(Cart.user_id == user_id).all()
+
+    if not carts:
+        raise HTTPException(status_code=404, detail="No cart items found for this user")
+
+    for cart in carts:
+        db.delete(cart)
+
+    db.commit()
+    return {"message": f"All cart items deleted for user_id {user_id}"}
