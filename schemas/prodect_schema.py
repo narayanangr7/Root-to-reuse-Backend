@@ -13,6 +13,7 @@ class ProductCreate(BaseModel):
     weight: str 
     shelf_life: str 
     usage: str 
+    image_url:str
 
 class ProductOut(ProductCreate):
     id: int
@@ -33,3 +34,4 @@ class ProductUpdate(BaseModel):
     weight: Optional[str] = None
     shelf_life: Optional[str] = None
     usage: Optional[str] = None
+    image_url:Optional[str] = None

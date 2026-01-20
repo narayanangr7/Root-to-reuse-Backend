@@ -7,6 +7,7 @@ class VolunteerBase(BaseModel):
     phone_no: str
     age: int
     location: str
+    message:str
 
 
 class VolunteerCreate(VolunteerBase):
@@ -18,7 +19,7 @@ class VolunteerUpdate(BaseModel):
     phone_no: str | None = None
     age: int | None = None
     location: str | None = None
-
+    message:str |None=None
 
 class VolunteerResponse(VolunteerBase):
     id: int

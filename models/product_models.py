@@ -17,6 +17,7 @@ class Product(Base):
     weight = Column(String)
     shelf_life = Column(String)
     usage = Column(String)
+    image_url=Column(String)
 
     category = relationship("Category", back_populates="products")
 

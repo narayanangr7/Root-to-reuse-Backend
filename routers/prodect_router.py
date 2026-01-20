@@ -28,6 +28,15 @@ def get_product_by_id(id: int, db: Session = Depends(get_db)):
         return product
     return {"error": "Product not found"}
 
+@router.get("/category/{category_id}", operation_id="get_products_by_category")
+def get_products_by_category(category_id: int, db: Session = Depends(get_db)):
+    products = db.query(Product).filter(Product.category_id == category_id).all()
+
+    if not products:
+        raise HTTPException(status_code=404, detail="No products found for this category")
+
+    return products
+
 
 @router.put("/{id}",operation_id="update_product")
 def update_product(id:int,data:ProductUpdate,db:Session=Depends(get_db)):

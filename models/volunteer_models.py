@@ -18,7 +18,7 @@ class Volunteer(Base):
     phone_no = Column(String, nullable=False)
     age = Column(Integer, nullable=False)
     location = Column(String, nullable=False)
-
+    message = Column(String,nullable=False)
     volunteer = relationship("User")
    
 
